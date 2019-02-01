@@ -6,13 +6,38 @@ namespace Composer\Autoload;
 
 class ComposerStaticInita69ea59f1cc6246054bd9b564dda43d5
 {
-    public static $files = array (
-        'cdef6b31cc34a02358d1804c5b73086c' => __DIR__ . '/..' . '/cptechinc/dplus-base/vendor/autoload.php',
+    public static $prefixLengthsPsr4 = array (
+        'D' => 
+        array (
+            'Dplus\\Import\\Orders\\BigCommerce\\' => 32,
+            'Dplus\\Import\\Orders\\' => 20,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Dplus\\Import\\Orders\\BigCommerce\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/BigCommerce',
+        ),
+        'Dplus\\Import\\Orders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
+    );
+
+    public static $classMap = array (
+        'Dplus\\Import\\Orders\\BigCommerce\\BaseAPI' => __DIR__ . '/../..' . '/src/BigCommerce/Base.class.php',
+        'Dplus\\Import\\Orders\\BigCommerce\\OrdersAPI' => __DIR__ . '/../..' . '/src/BigCommerce/Orders.php',
+        'Dplus\\Import\\Orders\\ObjectMapper' => __DIR__ . '/../..' . '/src/ObjectMapper.trait.php',
+        'Dplus\\Import\\Orders\\OrderImporter' => __DIR__ . '/../..' . '/src/OrderImporter.interface.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInita69ea59f1cc6246054bd9b564dda43d5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita69ea59f1cc6246054bd9b564dda43d5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita69ea59f1cc6246054bd9b564dda43d5::$classMap;
 
         }, null, ClassLoader::class);
     }

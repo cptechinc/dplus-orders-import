@@ -6,4 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Dplus\\Import\\Orders\\BigCommerce\\' => array($baseDir . '/src/BigCommerce'),
+    'Dplus\\Import\\Orders\\' => array($baseDir . '/src'),
 );

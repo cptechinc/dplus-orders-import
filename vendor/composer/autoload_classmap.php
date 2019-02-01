@@ -6,4 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Dplus\\Import\\Orders\\BigCommerce\\BaseAPI' => $baseDir . '/src/BigCommerce/Base.class.php',
+    'Dplus\\Import\\Orders\\BigCommerce\\OrdersAPI' => $baseDir . '/src/BigCommerce/Orders.php',
+    'Dplus\\Import\\Orders\\ObjectMapper' => $baseDir . '/src/ObjectMapper.trait.php',
+    'Dplus\\Import\\Orders\\OrderImporter' => $baseDir . '/src/OrderImporter.interface.php',
 );
