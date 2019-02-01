@@ -28,6 +28,13 @@
 			return $this->format_value($value, $fieldproperties);
         }
 
+        /**
+         * Travels down the property path if there is a period then determines the returns the value of the property
+         *
+         * @param  mixed  $object Array of Object to pull property value / path
+         * @param  string $field  $field to pull value from array / object
+         * @return mixed
+         */
         function find_value($object, $field) {
             if (strpos($field, '.') !== false) {
                 $property = $this->get_propertyfrompath($field);
@@ -38,7 +45,14 @@
             }
             return $value;
         }
-
+        
+        /**
+         * Returns array element / object property value
+         *
+         * @param  mixed  $object    Object / Array
+         * @param  string $property  Name of Property to return value of
+         * @return mixed
+         */
         function get_propertyvalue($object, $property) {
             if (is_array($object)) {
                 $value = isset($object[$field]) ? $object[$field] : '';
@@ -112,8 +126,6 @@
 			
 			return (empty($value) && isset($fieldproperties['default'])) ? $fieldproperties['default'] : $value;
         }
-        
-
         
 		/**
 		 * Sanitizes the value using str_replace

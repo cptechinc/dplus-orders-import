@@ -14,6 +14,7 @@
      */
     use Dplus\Base\ThrowErrorTrait;
     use SalesOrderEdit;
+    use SalesOrderDetail;
 
     /**
      * Immport classes / libs from same package
@@ -27,6 +28,8 @@
         protected $structure = array(
             'billing' => array( // This Maps SalesOrderEdit to BigCommerce\Api\Resources\Order
                 'orderno'      => array('field' => 'id'),
+                'sessionid'    => array('field' => 'id'),
+                'recno'        => array('field' => 'id'),
                 'custid'       => array('field' => 'customer_id'),
                 'orderdate'    => array('field' => 'date_created', 'format' => 'date', 'date-format' => 'Ymd'),
                 'shipdate'     => array('field' => 'date_shipped', 'format' => 'date', 'date-format' => 'Ymd'),
@@ -60,7 +63,9 @@
             ),
             'details' => array( // This maps SalesOrderDetail to BigCommerce\Api\Resources\OrderProduct
                 'orderno'    => array('field' => 'order_id'),
+                'sessionid'  => array('field' => 'order_id'),
                 'linenbr'    => array('field' => 'id'),
+                'recno'      => array('field' => 'id'),
                 'itemid'     => array('field' => 'product_id'),
                 'price'      => array('field' => 'base_price', 'format' => 'currency'),
                 'qty'        => array('field' => 'quantity'),
@@ -79,7 +84,10 @@
          * @return array   <BigCommerce\Api\Resources\Order>
          */
         public function get_orders($limit = 0, array $options) {
-            return BigCommerce::getOrders();
+            if ($limit) {
+                $options['limit'] = $limit;
+            } 
+            return BigCommerce::getOrders($options);
         }
 
         /**
@@ -91,7 +99,6 @@
         public function import_orders($limit = 0, array $options) {
             $results = array();
             $orders = $this->get_orders($limit, $options);
-
             foreach ($orders as $order) {
                 $results[$order->id] = $this->save_order($order);
             }
@@ -112,14 +119,28 @@
 
             $this->map_billing($bc_order, $dplusorder);
             $this->map_shipping($bc_order_addresses[0], $dplusorder);
-
             
-            $results['head'] = $dplusorder->_toArray();
+            // SalesOrderEdit in its current implementation does not create the record using the save()
+            // So we check if it exists, then create / update it
+            if (SalesOrderEdit::exists($dplusorder->sessionid, $dplusorder->ordernumber)) {
+                $results['head'] = $dplusorder->update();
+            } else {
+                $results['head'] = $dplusorder->create();
+            }
             
-            foreach ($bc_order_details as $bc_order_detail) {
-                $dplus_detail = new SalesOrderDetail();
-                $this->map_details($bc_order_detail, $dplus_detail);
-                $results['detail'][$bc_order_detail->id] = $dplus_detail->create();
+            if (!$results['head']) {
+                $this->error("$bc_order->id was not able to be saved");
+            } else {
+                
+                foreach ($bc_order_details as $bc_order_detail) {
+                    $dplus_detail = new SalesOrderDetail();
+                    $this->map_details($bc_order_detail, $dplus_detail);
+                    $results['detail'][$bc_order_detail->id] = $dplus_detail->save();
+                    
+                    if (!$results['detail'][$bc_order_detail->id]) {
+                        $this->error("$bc_order->id Line Number $bc_order_detail->id was not able to be saved");
+                    }
+                }
             }
             return $results;
         }
@@ -148,7 +169,7 @@
         protected function map_shipping(BigCommerceAddress $address, SalesOrderEdit $dplusorder) {
             foreach ($this->structure['shipping'] as $fieldname => $properties) {
                 $property = $fieldname;
-                $salesorder->set($property, $this->get_value($address, $fieldname, $properties));
+                $dplusorder->set($property, $this->get_value($address, $fieldname, $properties));
             }
         }
 
