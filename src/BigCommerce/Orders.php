@@ -66,11 +66,11 @@
                 'sessionid'  => array('field' => 'order_id'),
                 'linenbr'    => array('field' => 'id'),
                 'recno'      => array('field' => 'id'),
-                'itemid'     => array('field' => 'product_id'),
+                'itemid'     => array('field' => 'sku'),
                 'price'      => array('field' => 'base_price', 'format' => 'currency'),
                 'qty'        => array('field' => 'quantity'),
                 'desc1'      => array('field' => 'name'),
-                'desc2'      => array('field' => 'sku'),
+                'desc2'      => array('field' => 'product_id'),
                 'qtyshipped' => array('field' => 'qtyshipped'),
                 'totalprice' => array('field' => 'base_total', 'format' => 'currency')
             )
