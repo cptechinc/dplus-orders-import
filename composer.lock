@@ -1,0 +1,305 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "4dfeb07302a17c35161fe86c12328412",
+    "packages": [
+        {
+            "name": "atk4/core",
+            "version": "1.1.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/atk4/core.git",
+                "reference": "16992e7c34c9457ccd6d9cc7a84fbff4e326b96c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/atk4/core/zipball/16992e7c34c9457ccd6d9cc7a84fbff4e326b96c",
+                "reference": "16992e7c34c9457ccd6d9cc7a84fbff4e326b96c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "atk4\\core\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Romans Malinovskis",
+                    "email": "romans@agiletoolkit.org",
+                    "homepage": "https://nearly.guru/"
+                }
+            ],
+            "description": "Agile Core - collection of PHP Traits for designing object-oriented frameworks",
+            "homepage": "https://github.com/atk4/core",
+            "keywords": [
+                "Agile Toolkit",
+                "framework",
+                "php",
+                "trains"
+            ],
+            "time": "2017-02-18T18:10:59+00:00"
+        },
+        {
+            "name": "atk4/dsql",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/atk4/dsql.git",
+                "reference": "d97ebc9821e65920daeacebde9b3979b0258b9c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/atk4/dsql/zipball/d97ebc9821e65920daeacebde9b3979b0258b9c1",
+                "reference": "d97ebc9821e65920daeacebde9b3979b0258b9c1",
+                "shasum": ""
+            },
+            "require": {
+                "atk4/core": "~1.1.3",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "*",
+                "phpunit/dbunit": ">=1.2",
+                "phpunit/phpcov": "*",
+                "phpunit/phpunit": "~4.8|~5.2"
+            },
+            "suggest": {
+                "jdorn/sql-formatter": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "atk4\\dsql\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Romans Malinovskis",
+                    "email": "romans@agiletoolkit.org",
+                    "homepage": "https://nearly.guru/"
+                }
+            ],
+            "description": "Dynamic SQL Builder in PHP",
+            "homepage": "http://agiletoolkit.org/dsql/",
+            "keywords": [
+                "builder",
+                "framework",
+                "orm",
+                "sql"
+            ],
+            "time": "2017-03-08T09:52:14+00:00"
+        },
+        {
+            "name": "bigcommerce/api",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bigcommerce/bigcommerce-api-php.git",
+                "reference": "bd9f45260d077ee443f38e1dc025f6d64f19f0d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bigcommerce/bigcommerce-api-php/zipball/bd9f45260d077ee443f38e1dc025f6d64f19f0d3",
+                "reference": "bd9f45260d077ee443f38e1dc025f6d64f19f0d3",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "~3.0|~5.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "codeless/jugglecode": "1.0",
+                "php-coveralls/php-coveralls": "2.1",
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Bigcommerce": "src/"
+                },
+                "psr-4": {
+                    "Bigcommerce\\Test\\": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bigcommerce",
+                    "homepage": "http://www.bigcommerce.com"
+                }
+            ],
+            "description": "Enables PHP applications to communicate with the Bigcommerce API.",
+            "homepage": "http://developer.bigcommerce.com",
+            "keywords": [
+                "api",
+                "business",
+                "ecommerce",
+                "http",
+                "rest"
+            ],
+            "time": "2018-08-22T02:24:15+00:00"
+        },
+        {
+            "name": "cptechinc/dplus-base",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cptechinc/dplus-base.git",
+                "reference": "39d9c684749e0b55a9a1877c685fab7412533623"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cptechinc/dplus-base/zipball/39d9c684749e0b55a9a1877c685fab7412533623",
+                "reference": "39d9c684749e0b55a9a1877c685fab7412533623",
+                "shasum": ""
+            },
+            "require": {
+                "atk4/dsql": "1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dplus\\Base\\": "src/"
+                },
+                "files": [
+                    "src/utfport.php",
+                    "src/ModelClass.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Paul Gomez",
+                    "email": "paul@cptechinc.com",
+                    "homepage": "https://www.cptechinc.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Barbara Bullemer",
+                    "email": "barbara@cptechinc.com",
+                    "homepage": "https://www.cptechinc.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Base Classes and Attributes",
+            "homepage": "https://github.com/cptechinc/dplus-base",
+            "keywords": [
+                "dplus-attributes",
+                "dplus-base"
+            ],
+            "time": "2018-12-18T18:54:01+00:00"
+        },
+        {
+            "name": "cptechinc/dplus-order",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cptechinc/dplus-order.git",
+                "reference": "850589b07c75ccbeeea7de083db71776a5fcbbc8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cptechinc/dplus-order/zipball/850589b07c75ccbeeea7de083db71776a5fcbbc8",
+                "reference": "850589b07c75ccbeeea7de083db71776a5fcbbc8",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Classes for Dplus Orders, Quotes, and Carts",
+            "homepage": "http://github.com/cptechinc/dplus-order",
+            "keywords": [
+                "cart",
+                "cartquote",
+                "detail",
+                "qnote",
+                "quote",
+                "sales-order"
+            ],
+            "time": "2018-11-09T22:13:13+00:00"
+        },
+        {
+            "name": "firebase/php-jwt",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": " 4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "time": "2017-06-27T22:17:23+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "cptechinc/dplus-base": 20,
+        "cptechinc/dplus-order": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

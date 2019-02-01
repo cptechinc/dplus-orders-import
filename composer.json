@@ -1,0 +1,14 @@
+{
+    "minimum-stability": "dev",
+    "require": {
+        "bigcommerce/api": "^3.2",
+        "cptechinc/dplus-base": "dev-master",
+        "atk4/dsql": "1.1",
+        "cptechinc/dplus-order": "dev-master"
+    },
+    "autoload": {
+        "files": [ 
+            "vendor/cptechinc/dplus-base/vendor/autoload.php"
+        ]
+    }
+}
