@@ -1,4 +1,19 @@
 {
+    "name": "cptechinc/dplus-orders-import",
+    "authors": [
+        {
+            "name": "Paul Gomez",
+            "email": "paul@cptechinc.com",
+            "homepage": "https://www.cptechinc.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Barbara Bullemer",
+            "email": "barbara@cptechinc.com",
+            "homepage": "https://www.cptechinc.com",
+            "role": "Developer"
+        }
+    ],
     "minimum-stability": "dev",
     "require": {
         "bigcommerce/api": "^3.2",
