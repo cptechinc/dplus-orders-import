@@ -1,11 +1,13 @@
 <?php
+    namespace Dplus\Import\Orders;
+    
     use Bigcommerce\Api\Client as BigCommerce;
     use Bigcommerce\Api\Resources\Order as BigCommerceOrder;
     use Bigcommerce\Api\Resources\Address as BigCommerceAddress;
     use Bigcommerce\Api\Resources\OrderProduct as BigCommerceOrderProduct;
 
     use Dplus\Base\ThrowErrorTrait;
-    // use SalesOrderEdit;
+    use SalesOrderEdit;
     use Dplus\Base\Validator;
 
     class BigCommerceAPI {

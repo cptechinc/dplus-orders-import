@@ -22,8 +22,8 @@
         "cptechinc/dplus-order": "dev-master"
     },
     "autoload": {
-        "files": [ 
-            "vendor/cptechinc/dplus-base/vendor/autoload.php"
-        ]
+        "psr-4": {
+	        "Dplus\\Import\\Orders\\": "src/"
+	    }
     }
 }
