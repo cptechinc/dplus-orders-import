@@ -147,7 +147,7 @@
 
         /**
          * Sets the Sales Order property values by using the mapper for billing
-         * 
+         * NOTE The Billing Address State comes in itss long form (New York) not the 2 Character State Code (NY)
          * @param BigCommerceOrder $bc_order   Big Commerce Order 
          * @param SalesOrderEdit   $dplusorder Sales Order for Dplus
          * @return void
@@ -157,11 +157,12 @@
                 $property = $fieldname;
                 $dplusorder->set($property, $this->get_value($bc_order, $fieldname, $properties));
             }
+            $dplusorder->set('billstate', get_stateabbreviation(($bc_order->billing_address->state)));
         }
 
         /**
          * Sets the Sales Order property values by using the mapper for shipping
-         *
+         * NOTE The Billing Address State comes in itss long form (New York) not the 2 Character State Code (NY)
          * @param BigCommerceAddress $address    Big Commerce Address
          * @param SalesOrderEdit     $dplusorder Sales Order for Dplus
          * @return void
@@ -171,6 +172,7 @@
                 $property = $fieldname;
                 $dplusorder->set($property, $this->get_value($address, $fieldname, $properties));
             }
+            $dplusorder->set('shipstate', get_stateabbreviation(($address->state)));
         }
 
         /**
