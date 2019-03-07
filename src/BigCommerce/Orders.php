@@ -25,6 +25,16 @@
     class OrdersAPI extends BaseAPI implements OrderImporter {
         use ObjectMapper;
 
+        /**
+         * Payment Types and the Type they Map to in the SalesOrderEdit File
+         * @var array
+         */
+        protected $payment_types = array(
+            'default'                                       => 'cc',
+            'paypal'                                        => 'payp',
+            'Visa, Mastercard,  American Express, Discover' => 'cc'
+        );
+
         protected $structure = array(
             'billing' => array( // This Maps SalesOrderEdit to BigCommerce\Api\Resources\Order
                 'orderno'      => array('field' => 'id'),
@@ -120,6 +130,7 @@
             $this->map_billing($bc_order, $dplusorder);
             $this->map_shipping($bc_order_addresses[0], $dplusorder);
             
+            
             // SalesOrderEdit in its current implementation does not create the record using the save()
             // So we check if it exists, then create / update it
             if (SalesOrderEdit::exists($dplusorder->sessionid, $dplusorder->ordernumber)) {
@@ -158,6 +169,7 @@
                 $dplusorder->set($property, $this->get_value($bc_order, $fieldname, $properties));
             }
             $dplusorder->set('billstate', get_stateabbreviation(($bc_order->billing_address->state)));
+            $dplusorder->set('paymenttype', $this->payment_types[$bc_order->payment_method]);
         }
 
         /**
