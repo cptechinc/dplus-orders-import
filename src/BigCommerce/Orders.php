@@ -32,7 +32,7 @@
         protected $payment_types = array(
             'default'                                       => 'cc',
             'paypal'                                        => 'payp',
-            'Visa, Mastercard,  American Express, Discover' => 'cc'
+            'visa, mastercard,  american express, discover' => 'cc'
         );
 
         protected $structure = array(
@@ -147,7 +147,6 @@
                     $dplus_detail = new SalesOrderDetail();
                     $this->map_details($bc_order_detail, $dplus_detail);
                     $results['detail'][$bc_order_detail->id] = $dplus_detail->save();
-                    
                     if (!$results['detail'][$bc_order_detail->id]) {
                         $this->error("$bc_order->id Line Number $bc_order_detail->id was not able to be saved");
                     }
@@ -168,8 +167,8 @@
                 $property = $fieldname;
                 $dplusorder->set($property, $this->get_value($bc_order, $fieldname, $properties));
             }
-            $dplusorder->set('billstate', get_stateabbreviation(($bc_order->billing_address->state)));
-            $dplusorder->set('paymenttype', $this->payment_types[$bc_order->payment_method]);
+            $dplusorder->set('billstate', get_stateabbreviation(strtolower($bc_order->billing_address->state)));
+            $dplusorder->set('paymenttype', $this->payment_types[strtolower($bc_order->payment_method)]);
         }
 
         /**
