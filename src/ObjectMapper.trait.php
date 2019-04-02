@@ -107,8 +107,12 @@
 		protected function format_value($value, $fieldproperties) {
 			if (isset($fieldproperties['format'])) {
 				switch ($fieldproperties['format']) {
-					case 'date':
-						$value = date($fieldproperties['date-format'], strtotime($this->clean_value($value)));
+                    case 'date':
+                        if (empty($this->clean_value($value))) {
+                            $value = "";
+                        } else {
+                            $value = date($fieldproperties['date-format'], strtotime($this->clean_value($value)));
+                        }
                         break;
                     case 'currency':
                         $value = number_format(floatval($value), 2);
