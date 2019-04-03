@@ -12,7 +12,6 @@
     /**
      * Import Dplus Libraries and Model Classes
      */
-    use Dplus\Base\ThrowErrorTrait;
     use SalesOrderEdit;
     use SalesOrderDetail;
 
@@ -35,6 +34,13 @@
             'visa, mastercard,  american express, discover' => 'cc'
         );
 
+        /**
+         * Array of Keys (properties in the SalesOrderEdit Class)
+         * And their Properties such as what field corresponds with it, the formatting
+         * NOTE: Period (.) means a sublevel, a e.g. billing_address.city is $billing_address->company in the Orders Object
+         *
+         * @var array
+         */
         protected $structure = array(
             'billing' => array( // This Maps SalesOrderEdit to BigCommerce\Api\Resources\Order
                 'orderno'      => array('field' => 'id'),
@@ -79,7 +85,7 @@
                 'itemid'     => array('field' => 'sku'),
                 'price'      => array('field' => 'base_price', 'format' => 'currency'),
                 'qty'        => array('field' => 'quantity'),
-                'desc1'      => array('field' => 'name'),
+                'desc1'      => array('field' => 'name', 'strlen' => 35),
                 'desc2'      => array('field' => 'product_id'),
                 'qtyshipped' => array('field' => 'qtyshipped'),
                 'totalprice' => array('field' => 'base_total', 'format' => 'currency')
@@ -112,7 +118,8 @@
             foreach ($orders as $order) {
                 $results[$order->id] = $this->save_order($order);
             }
-            return $results;
+
+            return array('count' => sizeof($results), 'results' => $results);
         }
 
         /**
@@ -128,7 +135,13 @@
             $bc_order_details = BigCommerce::getOrderProducts($bc_order->id);
 
             $this->map_billing($bc_order, $dplusorder);
-            $this->map_shipping($bc_order_addresses[0], $dplusorder);
+            
+            if (get_class($bc_order_addresses[0]) != 'Bigcommerce\Api\Resources\Address') {
+                $this->error("$bc_order->id Does not have shipping");
+            } else {
+                $this->map_shipping($bc_order_addresses[0], $dplusorder);
+            }
+            
             
             
             // SalesOrderEdit in its current implementation does not create the record using the save()
@@ -140,15 +153,14 @@
             }
             
             if (!$results['head']) {
-                $this->error("$bc_order->id was not able to be saved");
-            } else {
-                
+                $this->error("Order $bc_order->id was not able to be saved");
+            } else { 
                 foreach ($bc_order_details as $bc_order_detail) {
                     $dplus_detail = new SalesOrderDetail();
                     $this->map_details($bc_order_detail, $dplus_detail);
                     $results['detail'][$bc_order_detail->id] = $dplus_detail->save();
-                    if (!$results['detail'][$bc_order_detail->id]) {
-                        $this->error("$bc_order->id Line Number $bc_order_detail->id was not able to be saved");
+                    if (!$results['detail'][$bc_order_detail->id] && $dplus_detail->has_changes()) {
+                        $this->error("Order $bc_order->id Line Number $bc_order_detail->id was not able to be saved");
                     }
                 }
             }
