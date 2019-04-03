@@ -1,6 +1,6 @@
 <?php
     namespace Dplus\Import\Orders\BigCommerce;
-    
+
     /**
      * Import Big Commerce Library
      */
@@ -102,7 +102,7 @@
         public function get_orders($limit = 0, array $options) {
             if ($limit) {
                 $options['limit'] = $limit;
-            } 
+            }
             return BigCommerce::getOrders($options);
         }
 
@@ -135,15 +135,15 @@
             $bc_order_details = BigCommerce::getOrderProducts($bc_order->id);
 
             $this->map_billing($bc_order, $dplusorder);
-            
+
             if (get_class($bc_order_addresses[0]) != 'Bigcommerce\Api\Resources\Address') {
                 $this->error("$bc_order->id Does not have shipping");
             } else {
                 $this->map_shipping($bc_order_addresses[0], $dplusorder);
             }
-            
-            
-            
+
+
+
             // SalesOrderEdit in its current implementation does not create the record using the save()
             // So we check if it exists, then create / update it
             if (SalesOrderEdit::exists($dplusorder->sessionid, $dplusorder->ordernumber)) {
@@ -151,10 +151,10 @@
             } else {
                 $results['head'] = $dplusorder->create();
             }
-            
+
             if (!$results['head']) {
                 $this->error("Order $bc_order->id was not able to be saved");
-            } else { 
+            } else {
                 foreach ($bc_order_details as $bc_order_detail) {
                     $dplus_detail = new SalesOrderDetail();
                     $this->map_details($bc_order_detail, $dplus_detail);
@@ -170,7 +170,7 @@
         /**
          * Sets the Sales Order property values by using the mapper for billing
          * NOTE The Billing Address State comes in itss long form (New York) not the 2 Character State Code (NY)
-         * @param BigCommerceOrder $bc_order   Big Commerce Order 
+         * @param BigCommerceOrder $bc_order   Big Commerce Order
          * @param SalesOrderEdit   $dplusorder Sales Order for Dplus
          * @return void
          */
@@ -179,7 +179,7 @@
                 $property = $fieldname;
                 $dplusorder->set($property, $this->get_value($bc_order, $fieldname, $properties));
             }
-            $dplusorder->set('billstate', get_stateabbreviation(strtolower($bc_order->billing_address->state)));
+            //$dplusorder->set('billstate', get_stateabbreviation(strtolower($bc_order->billing_address->state)));
             $dplusorder->set('paymenttype', $this->payment_types[strtolower($bc_order->payment_method)]);
         }
 
@@ -195,7 +195,7 @@
                 $property = $fieldname;
                 $dplusorder->set($property, $this->get_value($address, $fieldname, $properties));
             }
-            $dplusorder->set('shipstate', get_stateabbreviation(($address->state)));
+            //$dplusorder->set('shipstate', get_stateabbreviation(($address->state)));
         }
 
         /**

@@ -10,9 +10,28 @@
     class BaseAPI {
         use ThrowErrorTrait;
         
+        /**
+         * Big Commerce Client ID
+         * @var string
+         */
         protected $client_id;
+
+        /**
+         * Big Commerce Client Secret
+         * @var string
+         */
         protected $client_secret;
+
+       /**
+         * Big Commerce Client API token
+         * @var string
+         */
         protected $client_token;
+
+        /**
+         * Big Commerce Store Hash
+         * @var string
+         */
         protected $storehash;
 
         /**
